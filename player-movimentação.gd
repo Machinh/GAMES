@@ -1,10 +1,14 @@
 extends CharacterBody3D
 
+#troque<camera> e <$camera> pelo nome real da sua node da child node câmera3D abaixo! 
+@onready var camera = $camera
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+#sensibilidades
 var sens_horizontal = 0.5
+var sens_vertical = 0.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -15,8 +19,9 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x+sens_horizontal))
+		#troque a <camera> pelo nome real da sua node da child node câmera3D abaixo!
+		camera.rotate_x(deg_to_rad(-event.relative.y+sens_vertical))
 		
-
 
 func _physics_process(delta):
 	# Add the gravity.
